@@ -9,7 +9,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //using routers
 const productRouter = require("./routers/productRouter");
+const userRouter = require("./routers/userRouter");
 
 app.use("/api/v1", productRouter);
+app.use("/api/v1", userRouter);
 
 module.exports = app;
