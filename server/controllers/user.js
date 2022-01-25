@@ -153,7 +153,7 @@ exports.resetPassword = async (req, res) => {
     if (req.body.password !== req.body.confirmPassword) {
       return res.status(500).json({
         success: false,
-        message: "Entered password and Confirm passwor doesn't match",
+        message: "Entered password and Confirm password doesn't match",
       });
     }
 
@@ -164,6 +164,99 @@ exports.resetPassword = async (req, res) => {
     await user.save();
 
     sendToken(user, res, 200); //loggin in user, means simply sending the jwt token via cookies
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+//update password for logged in users
+exports.updatePassword = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("+password");
+
+    const isPasswordMatched = await user.comparePassword(
+      req.body.enteredPassword
+    );
+    if (!isPasswordMatched) {
+      return res.status(500).json({
+        success: false,
+        message: "Wrong password entered.",
+      });
+    }
+    if (req.body.newPassword !== req.body.confirmPassword) {
+      return res.status(500).json({
+        success: false,
+        message: "Entered password and Confirm password doesn't match",
+      });
+    }
+    user.password = req.body.newPassword;
+    await user.save();
+    sendToken(user, res, 200);
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+//update user profile
+exports.updateProfile = async (req, res) => {
+  try {
+    const newData = {
+      name: req.body.name,
+      email: req.body.email,
+    };
+    //yet to add avatar from cloudinary
+
+    const user = await User.findByIdAndUpdate(req.user.id, newData);
+
+    res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+//updating user and it's role
+exports.updateUserRole = async (req, res) => {
+  try {
+    const newData = {
+      name: req.body.name,
+      email: req.body.email,
+      role: req.body.role,
+    };
+    //yet to add avatar from cloudinary
+
+    const user = await User.findByIdAndUpdate(req.params.id, newData);
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+//deleting user profile
+exports.deleteProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+    await User.findByIdAndDelete(req.params.id);
+    res
+      .status(200)
+      .json({ success: true, message: "User deleted successfully" });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
