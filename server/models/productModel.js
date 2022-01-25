@@ -42,6 +42,10 @@ const productSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "User",
       },
+      name:{
+        type: String,
+        required: [true, "Please enter name"],
+      },
       comment: {
         type: String,
         required: [true, "Please enter review comment"],
