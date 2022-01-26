@@ -1,10 +1,15 @@
 import React from "react";
 import styles from "./Header.module.css";
+import logo from "../images/amazon-white.png";
 
 const Header = () => {
   return (
     <div className={styles.navbar}>
-      <p style={{ marginRight: "10px", cursor: "pointer" }}>Amazon.in</p>
+      <img
+        className={styles.logo}
+        src={logo}
+        alt="amazon_logo"
+      />
       <div className={styles.search}>
         <button className={styles.catBtn}>Cat</button>
         <input type="text" />
