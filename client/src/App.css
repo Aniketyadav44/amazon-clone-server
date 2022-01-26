@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "Ember Medium";
+  src: local("Ember Medium"), url("./fonts/Ember-medium.ttf") format("truetype");
+  font-weight: normal;
+}
+
+* {
+  margin: 0px;
+  font-size: 102%;
+}
+
+body {
+  font-family: Ember Medium;
+}
