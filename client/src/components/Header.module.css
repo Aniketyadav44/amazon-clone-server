@@ -1,29 +1,40 @@
 .navbar {
   background-color: #131921;
   display: grid;
-  grid-template-columns: 1fr 8fr 3fr;
-  height: 75px;
+  grid-template-columns: 1fr 20fr 1fr;
+  height: 60px;
   color: white;
   align-items: center;
   padding: 0px 10px 0px 10px;
+  top: 0;
+  position: fixed;
+  z-index: 999;
 }
 
-.logo {
-  margin-right: 10px;
+.logo > img {
   cursor: pointer;
-  width: 100%;
-  height: 6vh;
+  width: 115px;
+  height: 35px;
+  padding: 5px 10px;
+}
+
+.logo:hover {
+  border: 1px solid white;
+  border-radius: 3px;
+  margin: -1px;
 }
 
 .search {
   display: grid;
-  grid-template-columns: 1fr 15fr 1fr;
-  height: 52px;
+  grid-template-columns: 20fr 1fr;
+  height: 42px;
   margin: 0px 10px 0px 10px;
 }
 
 .search > input {
   outline: none;
+  border: none;
+  border-radius: 5px 0px 0px 5px;
 }
 
 .search > input:focus {
@@ -31,24 +42,50 @@
   border-radius: 2px;
 }
 
+.searchBtn {
+  background-color: #febd69;
+  cursor: pointer;
+  border: none;
+  width: 45px;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.searchBtn > img {
+  margin-top: 7px;
+}
+
+.searchBtn:hover {
+  background-color: #f3a847;
+}
+
 .links {
   display: grid;
-  grid-template-columns: 2fr 2fr 2fr;
-  height: 50px;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 60px;
+  align-content: center;
 }
 
 .links > div {
-  text-align: center;
-  height: 50px;
   cursor: pointer;
+  height: 50px;
+  width: fit-content;
+  padding: 0px 10px;
 }
 
 .links > div > p {
   margin-top: 15px;
+  font-size: 12px;
+  text-align: start;
+  width: fit-content;
+  margin: 9px auto;
+}
+
+.links > div > p > span {
+  font-size: 15px;
 }
 
 .links > div:hover {
   border: 1px solid white;
-  border-radius: 5px;
-  margin-top: -1px;
+  border-radius: 3px;
+  margin: -1px;
 }
