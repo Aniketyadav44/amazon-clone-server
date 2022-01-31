@@ -1,9 +1,9 @@
 import "./fonts/Ember-medium.ttf";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Signup from "./components/layouts/Signup";
-import Signin from "./components/layouts/Signin";
-import Home from "./components/layouts/Home";
+import Signup from "./components/screens/Signup";
+import Signin from "./components/screens/Signin";
+import Home from "./components/screens/Home";
 
 function App() {
   return (

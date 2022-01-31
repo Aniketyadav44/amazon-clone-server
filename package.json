@@ -18,8 +18,11 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.7",
     "nodemailer": "^6.7.2",
+    "react-helmet": "^6.1.0",
+    "react-rating-stars-component": "^2.2.0",
     "react-responsive-carousel": "^3.2.22",
     "react-router-dom": "^6.2.1",
+    "redux": "^4.1.2",
     "validator": "^13.7.0"
   }
 }

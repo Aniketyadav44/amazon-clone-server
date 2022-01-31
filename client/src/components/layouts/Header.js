@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Header.module.css";
-import logo from "../images/amazon-white.png";
-import cartIcon from "../images/cart_icon.png";
-import searchIcon from "../images/search_icon.png";
+import logo from "../../images/amazon-white.png";
+import cartIcon from "../../images/cart_icon.png";
+import searchIcon from "../../images/search_icon.png";
 import { Link } from "react-router-dom";
 
 

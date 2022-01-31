@@ -1,14 +1,14 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import styles from "./layouts/Home.module.css";
+import styles from "../screens/Home.module.css";
 
-import img1 from "../images/carousel_images/1.jpg";
-import img2 from "../images/carousel_images/2.jpg";
-import img3 from "../images/carousel_images/3.jpg";
-import img4 from "../images/carousel_images/4.jpg";
-import img5 from "../images/carousel_images/5.jpg";
-import img6 from "../images/carousel_images/6.jpg";
+import img1 from "../../images/carousel_images/1.jpg";
+import img2 from "../../images/carousel_images/2.jpg";
+import img3 from "../../images/carousel_images/3.jpg";
+import img4 from "../../images/carousel_images/4.jpg";
+import img5 from "../../images/carousel_images/5.jpg";
+import img6 from "../../images/carousel_images/6.jpg";
 
 const CarouselComp = () => {
   return (
