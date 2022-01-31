@@ -5,6 +5,7 @@ import cartIcon from "../images/cart_icon.png";
 import searchIcon from "../images/search_icon.png";
 import { Link } from "react-router-dom";
 
+
 const Header = () => {
   return (
     <div className={styles.navbar}>
