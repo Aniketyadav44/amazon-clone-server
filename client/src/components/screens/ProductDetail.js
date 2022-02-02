@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { getProductDetail } from "../../actions/productAction";
+import { clearErrors, getProductDetail } from "../../actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layouts/Loader/Loader";
 import { useParams } from "react-router-dom";
@@ -32,6 +32,7 @@ const ProductDetail = (props) => {
   useEffect(() => {
     if (error) {
       alert.error(error.toString());
+      dispatch(clearErrors());
       return;
     }
     dispatch(getProductDetail(id));

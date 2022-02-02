@@ -1,5 +1,5 @@
 const Product = require("../models/productModel");
-const User = require("../models/userModel");
+const ApiFeatures = require("../utils/apiFeatures");
 
 //creating new product
 exports.createProduct = async (req, res) => {
@@ -20,8 +20,28 @@ exports.createProduct = async (req, res) => {
 //getting all products
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find();
-    res.status(200).json({ success: true, products });
+    const resultsPerPage = 2;
+    const productsCount = await Product.countDocuments();
+
+    const apiFeature = new ApiFeatures(Product.find(), req.query)
+      .search()
+      .filter();
+
+    let products = await apiFeature.query;
+
+    let filteredProductsCount = products.length;
+
+    apiFeature.pagination(resultsPerPage);
+
+    products = await apiFeature.query.clone();
+
+    res.status(200).json({
+      success: true,
+      products,
+      productsCount,
+      resultsPerPage,
+      filteredProductsCount,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -56,7 +76,7 @@ exports.getProduct = async (req, res) => {
       star2percent: (star2 / product.reviews.length) * 100,
       star1percent: (star1 / product.reviews.length) * 100,
     };
-    res.status(200).json({ success: true, product,reviewData });
+    res.status(200).json({ success: true, product, reviewData });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

@@ -10,7 +10,7 @@ const productSchema = new mongoose.Schema({
     required: [true, "Please enter product mrp"],
   },
   discountedMrp: {
-    type: String,
+    type: Number,
     required: [true, "Please enter discounted mrp of product"],
   },
   images: [

@@ -4,7 +4,7 @@ import CarouselComp from "../layouts/CarouselComp";
 import Product from "../layouts/Product";
 import MetaData from "../layouts/MetaData";
 import { useSelector, useDispatch } from "react-redux";
-import { getProduct } from "../../actions/productAction";
+import { clearErrors, getProduct } from "../../actions/productAction";
 import Loader from "../layouts/Loader/Loader";
 import { useAlert } from "react-alert";
 
@@ -16,7 +16,8 @@ const Home = () => {
   useEffect(() => {
     if (error) {
       alert.error(error);
-      return
+      dispatch(clearErrors());
+      return;
     }
     dispatch(getProduct());
   }, [dispatch, error, alert]);
