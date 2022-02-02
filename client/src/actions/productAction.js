@@ -1,21 +1,24 @@
 import axios from "axios";
 
-export const getProduct = () => async (dispatch) => {
-  try {
-    dispatch({ type: "ALL_PRODUCT_REQUEST" });
-    const { data } = await axios.get("/api/v1/products");
-    dispatch({
-      type: "ALL_PRODUCT_SUCCESS",
-      payload: data,
-    });
-  } catch (error) {
-    console.log(error.response.data.message);
-    dispatch({
-      type: "ALL_PRODUCT_FAILURE",
-      payload: error.response.data.message,
-    });
-  }
-};
+export const getProduct =
+  (keyword = "", currentPage = 1, price = [0, 1000000000], rating = [0, 5]) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: "ALL_PRODUCT_REQUEST" });
+      const link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&discountedMrp[gte]=${price[0]}&discountedMrp[lte]=${price[1]}&ratings[gte]=${rating[0]}&ratings[lte]=${rating[1]}`;
+      const { data } = await axios.get(link);
+      dispatch({
+        type: "ALL_PRODUCT_SUCCESS",
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error.response.data.message);
+      dispatch({
+        type: "ALL_PRODUCT_FAILURE",
+        payload: error.response.data.message,
+      });
+    }
+  };
 
 export const getProductDetail = (id) => async (dispatch) => {
   try {
