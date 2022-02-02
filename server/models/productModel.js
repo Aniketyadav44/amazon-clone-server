@@ -42,17 +42,29 @@ const productSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "User",
       },
-      name:{
+      avatar: {
+        public_id: { type: String, required: true },
+        url: { type: String, required: true },
+      },
+      name: {
         type: String,
         required: [true, "Please enter name"],
       },
-      comment: {
+      commentTitle: {
         type: String,
-        required: [true, "Please enter review comment"],
+        required: [true, "Please enter review comment title"],
+      },
+      commentBody: {
+        type: String,
+        required: [true, "Please enter review comment body"],
       },
       rating: {
         type: Number,
         required: [true, "Please enter the rating"],
+      },
+      reviewdOn: {
+        type: Date,
+        default: Date.now,
       },
     },
   ],

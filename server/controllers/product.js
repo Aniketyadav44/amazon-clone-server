@@ -30,13 +30,33 @@ exports.getAllProducts = async (req, res) => {
 //getting single product by passing product id in params
 exports.getProduct = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate("createdBy");
     if (!product) {
       return res
         .status(404)
         .json({ success: false, message: "Product not found" });
     }
-    res.status(200).json({ success: true, product });
+    let star5 = 0;
+    let star4 = 0;
+    let star3 = 0;
+    let star2 = 0;
+    let star1 = 0;
+
+    product.reviews.forEach((r) => {
+      r.rating === 5 && star5++;
+      r.rating === 4 && star4++;
+      r.rating === 3 && star3++;
+      r.rating === 2 && star2++;
+      r.rating === 1 && star1++;
+    });
+    const reviewData = {
+      star5percent: (star5 / product.reviews.length) * 100,
+      star4percent: (star4 / product.reviews.length) * 100,
+      star3percent: (star3 / product.reviews.length) * 100,
+      star2percent: (star2 / product.reviews.length) * 100,
+      star1percent: (star1 / product.reviews.length) * 100,
+    };
+    res.status(200).json({ success: true, product,reviewData });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -82,11 +102,12 @@ exports.deleteProduct = async (req, res) => {
 //create/update produtct review
 exports.createReview = async (req, res) => {
   try {
-    const { comment, rating, productId } = req.body;
+    const { commentTitle, commentBody, rating, productId } = req.body;
     const review = {
-      user: req.user._id,
+      avatar: req.user.avatar,
       name: req.user.name,
-      comment: comment,
+      commentTitle,
+      commentBody,
       rating: Number(rating),
     };
 
@@ -107,7 +128,9 @@ exports.createReview = async (req, res) => {
     if (isAlreadyReviewed) {
       product.reviews.forEach((rev) => {
         if (rev.user.toString() === req.user._id.toString()) {
-          (rev.rating = rating), (rev.comment = comment);
+          (rev.rating = rating),
+            (rev.commentTitle = commentTitle),
+            (rev.commentBody = commentBody);
         }
       });
     } else {

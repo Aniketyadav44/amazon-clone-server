@@ -1,42 +1,39 @@
-import React from "react";
-import CategoryNav from "../layouts/CategoryNav";
-import Header from "../layouts/Header";
+import React, { useEffect } from "react";
 import styles from "./Home.module.css";
 import CarouselComp from "../layouts/CarouselComp";
 import Product from "../layouts/Product";
 import MetaData from "../layouts/MetaData";
-
-const product = [
-  {
-    name: "Honor Y6",
-    _id: "hello",
-    mrp: 20000,
-    discountedMrp: 16000,
-    description: "This is a band by Huawei",
-    category: "Smart Phone",
-  },
-  {
-    name: "Honor Y6",
-    _id: "hello",
-    mrp: 20000,
-    discountedMrp: 15500,
-    description: "This is a band by Huawei",
-    category: "Smart Phone",
-  },
-];
+import { useSelector, useDispatch } from "react-redux";
+import { getProduct } from "../../actions/productAction";
+import Loader from "../layouts/Loader/Loader";
+import { useAlert } from "react-alert";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const { loading, error, products } = useSelector((state) => state.products);
+  const alert = useAlert();
+
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      return
+    }
+    dispatch(getProduct());
+  }, [dispatch, error, alert]);
+
   return (
     <div className={styles.home}>
       <MetaData title="Amazon Clone" />
-      <Header />
-      <CategoryNav />
       <CarouselComp />
       <div className={styles.home_products}>
         <h2>All Products</h2>
-        {product.map((p) => {
-          return <Product product={p} />;
-        })}
+        {loading ? (
+          <Loader />
+        ) : (
+          products.map((p) => {
+            return <Product key={p._id} product={p} />;
+          })
+        )}
       </div>
     </div>
   );

@@ -7,7 +7,6 @@ const rating_stars_options = {
   edit: false,
   color: "rgba(20,20,20,0.1)",
   activeColor: "#FFA41C",
-  value: "3.5",
   isHalf: true,
   size: 24,
 };
@@ -16,20 +15,26 @@ const Product = (props) => {
   return (
     <div className={styles.product_item}>
       <div className={styles.product_img_div}>
-        <Link to="/">
+        <Link to={`/product/${props.product._id}`}>
           <img
             className={styles.product_img}
             alt="."
-            src="https://m.media-amazon.com/images/I/71Y8rH2cJiL._AC_UY327_FMwebp_QL65_.jpg"
+            src={props.product.images[0].url}
           />
         </Link>
       </div>
       <div>
         <div className={styles.product_right}>
-          <Link className={styles.name} to="/">
+          <Link className={styles.name} to={`/product/${props.product._id}`}>
             <p>{props.product.name}</p>
           </Link>
-          <ReactStars {...rating_stars_options} />
+          <div className={styles.ratingDiv}>
+            <ReactStars
+              value={props.product.ratings}
+              {...rating_stars_options}
+            />
+            <p>{props.product.reviews.length} reviews</p>
+          </div>
           <p>
             <span
               style={{
@@ -47,8 +52,10 @@ const Product = (props) => {
             <span className={styles.discount}>
               Save ₹
               <span>{props.product.mrp - props.product.discountedMrp}</span> (
-              {((props.product.mrp - props.product.discountedMrp) * 100) /
-                props.product.mrp}
+              {Math.round(
+                ((props.product.mrp - props.product.discountedMrp) * 100) /
+                  props.product.mrp
+              )}
               )%
             </span>
           </p>
