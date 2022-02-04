@@ -1,0 +1,30 @@
+.home {
+  background-color: #EAEDED;
+}
+
+.carousel_image {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0)
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.home_products {
+  background-color: white;
+  margin: 0px 20px;
+  padding: 10px;
+  position: relative;
+  margin-top: -20%;
+}
+
+.home_products>h2{
+  font-size: 20px;
+}

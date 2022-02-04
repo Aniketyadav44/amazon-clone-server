@@ -1,38 +1,31 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: "Ember Medium";
+  src: local("Ember Medium"), url("./fonts/Ember-medium.ttf") format("truetype");
+  font-weight: normal;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  margin: 0px;
+  font-size: 102%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  font-family: Ember Medium;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.pagination {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgb(255 255 255 / 50%);
+  box-shadow: 0 0 1px rgb(255 255 255 / 50%);
 }

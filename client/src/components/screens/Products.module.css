@@ -1,0 +1,160 @@
+.paginationBox {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 40px;
+}
+
+.itemClass {
+  text-decoration: none;
+  list-style: none;
+  border: 1px solid #d5d9d9;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+  padding: 15px 20px;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.itemClass:first-child {
+  border-radius: 8px 0 0 8px;
+}
+.itemClass:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.linkClass {
+  text-decoration: none;
+  color: #6f7373;
+}
+
+.itemClass:hover {
+  background-color: #f5f6f6;
+}
+
+.activeClass {
+  border: 1px solid black;
+}
+
+.activeLinkClass {
+  color: black;
+}
+
+.products {
+  display: flex;
+  flex-direction: row;
+  height: wrap-content;
+}
+
+.filter {
+  margin-left: 10px;
+}
+
+.priceRange {
+  width: 230px;
+}
+
+.priceRange > p {
+  font-size: 14px;
+  line-height: 16px !important;
+  color: #0f1111;
+  cursor: pointer;
+  margin-top: 5px;
+  width: fit-content;
+}
+
+.priceRange > p:hover {
+  color: #d99000;
+}
+
+.customPrice > form {
+  display: flex;
+  flex-direction: row;
+}
+
+.rs1 {
+  font-size: 14px;
+  color: #7e7575;
+  width: fit-content;
+  margin-top: -28px;
+  margin-left: 4px;
+}
+
+.rs2 {
+  font-size: 14px;
+  color: #7e7575;
+  width: fit-content;
+  margin-top: -17.5px;
+  margin-left: 76px;
+}
+
+.customPrice > form > input {
+  width: 45px;
+  padding-left: 18px;
+  margin-top: 6px !important;
+  background-color: #fff;
+  height: 27px;
+  padding: 3px 7px;
+  padding-left: 13px;
+  line-height: normal;
+  border: 1px solid #888c8c;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgb(15 17 17 / 15%) inset;
+  outline: 0;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.customPrice > form > button {
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+  outline: 0;
+  background-color: white;
+  font-size: 14px;
+  align-self: center;
+  margin-left: 5px;
+  margin-top: 3px;
+}
+
+.starDiv {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  cursor: pointer;
+}
+.starDiv > p {
+  font-size: 14px;
+  margin-left: 10px;
+  align-self: center;
+  margin-top: 4px;
+}
+.starDiv:hover {
+  color: #d99000;
+}
+
+.pageHeader {
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 5px 5px -2px #ddd;
+  margin-bottom: 20px;
+}
+
+.pageHeader > p {
+  font-size: 15px;
+  width: fit-content;
+  margin-left: 10px;
+  position: absolute;
+  margin-top: 10px;
+}
+
+.errp {
+  font-size: 15px;
+  margin: 20px 0;
+  margin-left: 10px;
+  color: #d99000;
+}
