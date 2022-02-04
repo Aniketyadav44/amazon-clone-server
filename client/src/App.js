@@ -9,6 +9,7 @@ import Header from "./components/layouts/Header";
 import CategoryNav from "./components/layouts/CategoryNav";
 import Footer from "./components/layouts/Footer";
 import Products from "./components/screens/Products";
+import CreateReview from "./components/screens/CreateReview";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         {/* {This route is for development purpose only, delete it later} */}
         <Route path="/search" element={<Products />} />
         <Route path="/search/:keyword" element={<Products />} />
+        <Route path="/create-review/:id" element={<CreateReview />} />
       </Routes>
       <Footer />
     </div>

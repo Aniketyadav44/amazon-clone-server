@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { clearErrors, getProductDetail } from "../../actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layouts/Loader/Loader";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import styles from "./ProductDetail.module.css";
 import MetaData from "../layouts/MetaData";
@@ -25,6 +25,7 @@ const ProductDetail = (props) => {
   );
   const { id } = useParams();
   const alert = useAlert();
+  const navigate = useNavigate();
 
   const [selectedImage, setSelectedImage] = useState(0);
   const quantityRef = useRef();
@@ -281,7 +282,12 @@ const ProductDetail = (props) => {
               <p style={{ fontSize: "14px", marginBottom: "16px" }}>
                 Share your thoughts with other customers
               </p>
-              <button className={styles.write_review_btn}>
+              <button
+                className={styles.write_review_btn}
+                onClick={() => {
+                  navigate(`/create-review/${id}`);
+                }}
+              >
                 Write a product review
               </button>
               <hr style={{ marginTop: "30px" }} className={styles.custom_hr} />
