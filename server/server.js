@@ -7,6 +7,8 @@ require("dotenv").config();
 const connectDatabase = require("./config/database");
 connectDatabase();
 
+
+
 //listening app
 app.listen(process.env.PORT, () => {
   console.log("Listening on port:", process.env.PORT);

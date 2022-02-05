@@ -62,7 +62,7 @@ const Products = () => {
 
   return (
     <div>
-      <MetaData title={keyword} />
+      <MetaData title={`${keyword} -Amazon Clone`} />
       {filteredProductsCount ? (
         <div className={styles.pageHeader}>
           <p>

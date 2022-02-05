@@ -6,6 +6,7 @@ import ReactStars from "react-rating-stars-component";
 import Loader from "../layouts/Loader/Loader";
 import { useAlert } from "react-alert";
 import { clearErrors, getProductDetail } from "../../actions/productAction";
+import MetaData from "../layouts/MetaData";
 
 const CreateReview = () => {
   const alert = useAlert();
@@ -24,7 +25,7 @@ const CreateReview = () => {
       return;
     }
 
-    !product.name && dispatch(getProductDetail(id));
+    dispatch(getProductDetail(id));
   }, [error, alert, dispatch, id]);
 
   const submitReview = () => {
@@ -33,6 +34,7 @@ const CreateReview = () => {
 
   return (
     <div>
+    <MetaData title="Review your Purchase"/>
       <div className={styles.profile_div}>
         <div className={styles.profile_innerDiv}>
           <div className={styles.user_avatar}>
