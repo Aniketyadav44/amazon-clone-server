@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./CreateReview.module.css";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import ReactStars from "react-rating-stars-component";
 import Loader from "../layouts/Loader/Loader";
@@ -11,8 +11,10 @@ import MetaData from "../layouts/MetaData";
 const CreateReview = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
   const { error, product, loading } = useSelector((state) => state.product);
+  const { isAuthenticated } = useSelector((state) => state.user);
 
   const [rating, setRating] = useState(0);
   const headlineRef = useRef();
@@ -25,8 +27,12 @@ const CreateReview = () => {
       return;
     }
 
+    if (!isAuthenticated) {
+      navigate("/signin");
+    }
+
     dispatch(getProductDetail(id));
-  }, [error, alert, dispatch, id]);
+  }, [error, alert, dispatch, id, isAuthenticated, navigate]);
 
   const submitReview = () => {
     console.log(rating, headlineRef.current.value, reviewRef.current.value);
@@ -34,7 +40,7 @@ const CreateReview = () => {
 
   return (
     <div>
-    <MetaData title="Review your Purchase"/>
+      <MetaData title="Review your Purchase" />
       <div className={styles.profile_div}>
         <div className={styles.profile_innerDiv}>
           <div className={styles.user_avatar}>

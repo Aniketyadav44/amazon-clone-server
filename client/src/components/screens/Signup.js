@@ -34,7 +34,7 @@ const Signup = () => {
       return;
     }
     if (isAuthenticated) {
-      navigate("/account");
+      navigate(-1);
     }
   }, [error, alert, dispatch, navigate, isAuthenticated]);
 

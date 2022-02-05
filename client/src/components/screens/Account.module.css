@@ -1,0 +1,72 @@
+.account_div {
+  width: 1000px;
+  margin: 20px auto;
+}
+
+.account_div > h1 {
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 36px;
+  margin: 20px 0;
+}
+
+.table {
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.table_cell {
+  width: 315px;
+  display: block;
+  border-radius: 8px;
+  background-color: #fff;
+  border: 1px #d5d9d9 solid;
+  height: 100px;
+}
+.table_cell:hover {
+  background-color: #eeeeee;
+}
+.cell_inner {
+  border-radius: 8px;
+  position: relative;
+  padding: 14px 18px;
+  box-sizing: border-box;
+  width: 100%;
+}
+.cell_image {
+  margin-right: 2%;
+  float: left;
+  min-height: 1px;
+  overflow: visible;
+  width: 23.448%;
+}
+.cell_image > img {
+  max-width: 100%;
+  vertical-align: top;
+  border: 0;
+}
+.cell_text_div {
+  margin-right: 0;
+  float: right;
+  width: 74.448%;
+  min-height: 1px;
+  overflow: visible;
+}
+.cell_text_div > h2 {
+  padding-bottom: 0;
+  color: #111;
+  font-size: 17px;
+  margin-bottom: 0 !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+}
+
+.text_div > span {
+  color: #565959 !important;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+}

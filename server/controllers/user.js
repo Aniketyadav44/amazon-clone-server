@@ -11,13 +11,14 @@ exports.createUser = async (req, res) => {
       name,
       email,
       password,
-      avatar: { public_id: "public id", url: "pic url" },
     });
 
     sendToken(user, res, 200);
   } catch (error) {
-    if(error.code===11000){
-      return res.status(500).json({ success: false, message: "Email already exists" });
+    if (error.code === 11000) {
+      return res
+        .status(500)
+        .json({ success: false, message: "Email already exists" });
     }
     res.status(500).json({ success: false, message: error.message });
   }
@@ -59,9 +60,7 @@ exports.logoutUser = async (req, res) => {
       expires: new Date(Date.now()),
     });
 
-    res
-      .status(200)
-      .json({ success: true, message: "User logged out successfully" });
+    res.status(200).json({ success: true, message: "Logout Successfully" });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -81,6 +80,21 @@ exports.getAllUsers = async (req, res) => {
 exports.getUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+    res.status(200).json({ success: true, user });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+//get logged in user
+exports.getLoggedinUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
     if (!user) {
       return res
         .status(404)
@@ -228,7 +242,6 @@ exports.updateUserRole = async (req, res) => {
       email: req.body.email,
       role: req.body.role,
     };
-    //yet to add avatar from cloudinary
 
     const user = await User.findByIdAndUpdate(req.params.id, newData);
 

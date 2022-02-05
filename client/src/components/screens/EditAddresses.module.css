@@ -1,0 +1,33 @@
+.mainDiv {
+  width: 900px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.routesDiv {
+  display: flex;
+  flex: row;
+}
+.routesDiv_p {
+  font-size: 14px;
+  line-height: 20px;
+  color: #007185 !important;
+  cursor: pointer;
+}
+.routesDiv_p:hover {
+  color: #c45500;
+  text-decoration: underline;
+}
+.routesDiv > p {
+  color: #c45500;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.mainDiv > h1 {
+  margin-top: 20px;
+  margin-bottom: 16px;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 36px;
+}

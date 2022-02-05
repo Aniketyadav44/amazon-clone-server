@@ -33,7 +33,7 @@ const Signin = () => {
     }
 
     if(isAuthenticated){
-      navigate("/account")
+      navigate(-1)
     }
   }, [error, alert, dispatch,isAuthenticated, navigate]);
 

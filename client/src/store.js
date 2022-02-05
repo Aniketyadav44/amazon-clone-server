@@ -5,7 +5,7 @@ import {
   productReducer,
   productDetailReducer,
 } from "./reducers/productReducer";
-import { userReducer } from "./reducers/userReducer";
+import {userReducer } from "./reducers/userReducer";
 
 const reducer = combineReducers({
   products: productReducer,

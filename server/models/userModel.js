@@ -28,10 +28,6 @@ const userSchema = new mongoose.Schema({
   address: {
     type: String,
   },
-  avatar: {
-    public_id: { type: String },
-    url: { type: String },
-  },
   role: {
     type: String,
     default: "user",

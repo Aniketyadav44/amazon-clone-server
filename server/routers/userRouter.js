@@ -11,6 +11,7 @@ const {
   updateProfile,
   deleteProfile,
   updateUserRole,
+  getLoggedinUser,
 } = require("../controllers/user");
 const { isAuthenticated, authorizeRoles } = require("../middlewares/auth");
 
@@ -28,6 +29,8 @@ router
   .route("/user/:id")
   .get(isAuthenticated, getUser)
   .delete(isAuthenticated, authorizeRoles("admin"), deleteProfile);
+
+router.route("/me").get(isAuthenticated, getLoggedinUser);
 
 router.route("/password/forgot").post(forgotPassword);
 
