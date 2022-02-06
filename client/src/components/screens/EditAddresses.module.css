@@ -2,6 +2,7 @@
   width: 900px;
   margin: 0 auto;
   padding: 10px;
+  min-height: 100vh;
 }
 
 .routesDiv {
@@ -18,10 +19,20 @@
   color: #c45500;
   text-decoration: underline;
 }
-.routesDiv > p {
+.yourAddresses {
   color: #c45500;
   font-size: 14px;
   line-height: 20px;
+}
+.yourAddresses_newForm {
+  font-size: 14px;
+  line-height: 20px;
+  color: #007185 !important;
+  cursor: pointer;
+}
+.yourAddresses_newForm:hover {
+  color: #c45500;
+  text-decoration: underline;
 }
 
 .mainDiv > h1 {
@@ -30,4 +41,102 @@
   font-weight: 400;
   font-size: 28px;
   line-height: 36px;
+}
+
+.add_div > h1 {
+  font-weight: 700;
+  font-size: 24px;
+  color: #565959;
+  line-height: 32px;
+}
+
+.add_div {
+  border-style: dashed;
+  height: 266px;
+  width: 320px;
+  border-width: 2px;
+  box-sizing: border-box;
+  border-color: #c7c7c7;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.newadd_div {
+  width: 500px;
+  min-height: 100vh;
+  margin: 20px auto;
+}
+.newadd_div > h2 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  padding-bottom: 10px;
+}
+.newadd_div > form > label {
+  font-size: 14px !important;
+  line-height: 20px !important;
+}
+.newadd_div > form > input {
+  background-color: #fff;
+  height: 28px;
+  width: 100% !important;
+  padding: 3px 7px;
+  line-height: normal;
+  border: 1px solid #888c8c;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgb(15 17 17 / 15%) inset;
+  outline: 0;
+  margin-top: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.newadd_div > form > input:focus {
+  box-shadow: 0 0 1px 3px #c8f3fa;
+}
+
+.submitBtn {
+  padding: 10px;
+  border-radius: 10px;
+  background: #ffd814;
+  border-color: #fcd200;
+  font-size: 13px;
+  outline: 0;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.submitBtn:hover {
+  background: #f7ca00;
+}
+
+.address_row {
+  display: flex;
+  flex-direction: row;
+}
+
+.user_address {
+  min-height: 236px;
+  width: 320px;
+  margin: 0 10px;
+  border: 1px #d5d9d9 solid;
+  border-radius: 8px;
+  padding: 14px 18px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.user_address > h3 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 10px 0;
+  height: fit-content;
+}
+.user_address > p {
+  font-size: 16px;
+  line-height: 20px;
+  margin-top: -100px;
 }

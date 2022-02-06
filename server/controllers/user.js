@@ -220,8 +220,9 @@ exports.updateProfile = async (req, res) => {
     const newData = {
       name: req.body.name,
       email: req.body.email,
+      address: req.body.address,
+      phone: req.body.phone,
     };
-    //yet to add avatar from cloudinary
 
     const user = await User.findByIdAndUpdate(req.user.id, newData);
 

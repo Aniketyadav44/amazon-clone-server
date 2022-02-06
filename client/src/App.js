@@ -17,6 +17,7 @@ import Account from "./components/screens/Account";
 import Orders from "./components/screens/Orders";
 import EditLogin from "./components/screens/EditLogin";
 import EditAddresses from "./components/screens/EditAddresses";
+import Admin from "./components/screens/Admin";
 
 function App() {
   useEffect(() => {
@@ -39,7 +40,8 @@ function App() {
         <Route path="/account" element={<Account />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/edit-account" element={<EditLogin />} />
-        <Route path="/edit-addresses" element={<EditAddresses />} />
+        <Route path="/edit-addresses/*" element={<EditAddresses />} />
+        <Route path="/admin" element={<Admin/>}/>
       </Routes>
       <Footer />
     </div>

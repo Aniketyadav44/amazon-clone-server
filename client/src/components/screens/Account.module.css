@@ -1,6 +1,7 @@
 .account_div {
   width: 1000px;
   margin: 20px auto;
+  min-height: 100vh;
 }
 
 .account_div > h1 {
