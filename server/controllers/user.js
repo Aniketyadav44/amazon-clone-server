@@ -208,7 +208,9 @@ exports.updatePassword = async (req, res) => {
     }
     user.password = req.body.newPassword;
     await user.save();
-    sendToken(user, res, 200);
+    res
+      .status(200)
+      .json({ success: true, message: "Password updated successfully" });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

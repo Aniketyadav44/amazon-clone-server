@@ -1,13 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styles from "./EditLogin.module.css";
 import validator from "validator";
 import MetaData from "../layouts/MetaData";
+import { useAlert } from "react-alert";
+import {
+  loadUser,
+  updateProfile,
+  updatePassword,
+} from "../../actions/userAction";
+import Loader from "../layouts/Loader/Loader";
 
 const EditLogin = () => {
-  const { isAuthenticated, user, error } = useSelector((state) => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
   const navigate = useNavigate();
+
+  const { loading, error, isUpdated } = useSelector((state) => state.profile);
+  const dispatch = useDispatch();
+  const alert = useAlert();
 
   const [editName, setEditName] = useState(false);
   const [editEmail, setEditEmail] = useState(false);
@@ -19,6 +30,7 @@ const EditLogin = () => {
   const phone = useRef();
   const oldPass = useRef();
   const newPass = useRef();
+  const confirmNewPass = useRef();
 
   const [nameError, setNameError] = useState([false, ""]);
   const [emailError, setEmailError] = useState([false, ""]);
@@ -26,10 +38,21 @@ const EditLogin = () => {
   const [passError, setPassError] = useState([false, ""]);
 
   useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch({type:"CLEAR_ERROR"});
+      return;
+    }
+
     if (!isAuthenticated) {
       navigate("/signin");
     }
-  }, [isAuthenticated, navigate]);
+    if (isUpdated) {
+      alert.success("Profile updated successfully");
+      dispatch(loadUser());
+      dispatch({ type: "UPDATE_PROFILE_RESET" });
+    }
+  }, [isAuthenticated, navigate, isUpdated, error, alert, dispatch]);
 
   const handleEditName = () => {
     const inputName = name.current.value;
@@ -39,7 +62,7 @@ const EditLogin = () => {
       setEditName(!editName);
       return;
     }
-    console.log("edit name", inputName);
+    dispatch(updateProfile({ name: inputName }));
   };
 
   const handleEditEmail = () => {
@@ -50,7 +73,7 @@ const EditLogin = () => {
       setEditEmail(!editEmail);
       return;
     }
-    console.log("edit email", inputEmail);
+    dispatch(updateProfile({ email: inputEmail }));
   };
 
   const handleEditPhone = () => {
@@ -61,24 +84,36 @@ const EditLogin = () => {
       setEditPhone(!editPhone);
       return;
     }
-    console.log("edit phone", inputPhone);
+    dispatch(updateProfile({ phone: inputPhone }));
   };
 
   const handleEditPassword = () => {
     const inputOldPass = oldPass.current.value;
     const inputNewPass = newPass.current.value;
+    const inputConfirmNewPass = confirmNewPass.current.value;
     setPassError([false, ""]);
-    if (!inputOldPass || !inputNewPass) {
+    if (!inputOldPass || !inputNewPass || !inputConfirmNewPass) {
       setPassError([true, "Password is required"]);
       setEditPass(!editPass);
       return;
     }
-    console.log("edit pass", inputOldPass, inputNewPass);
+    if (inputNewPass.length < 6) {
+      setPassError([true, "Password must be at least 6 characters"]);
+      setEditPass(!editPass);
+      return;
+    }
+    dispatch(
+      updatePassword({
+        enteredPassword: inputOldPass,
+        newPassword: inputNewPass,
+        confirmPassword: inputConfirmNewPass,
+      })
+    );
   };
 
   return (
     <div className={styles.mainDiv}>
-    <MetaData title="Edit Login"/>
+      <MetaData title="Edit Account" />
       <div className={styles.routesDiv}>
         <p
           className={styles.routesDiv_p}
@@ -91,105 +126,127 @@ const EditLogin = () => {
         <p style={{ fontSize: "14px", color: "black" }}>{"> "}</p>
         <p> &nbsp;Login & Security</p>
       </div>
-      <div className={styles.editDiv}>
-        <div className={styles.editRowDiv}>
-          <div className={styles.editRowLeft}>
-            <p>Name:</p>
-            <p>{user.name}</p>
-            {editName && (
-              <input type="text" placeholder={user.name} ref={name} />
-            )}
-            {nameError[0] && (
-              <p className={styles.error_text}>{nameError[1]}</p>
-            )}
-          </div>
-          <div className={styles.editRowRight}>
-            <button
-              onClick={() => {
-                setEditName(!editName);
-                editName && handleEditName();
-              }}
-            >
-              {editName ? "Save" : "Edit"}
-            </button>
-          </div>
-        </div>
-        <div className={styles.editRowDiv}>
-          <div className={styles.editRowLeft}>
-            <p>E-mail:</p>
-            <p>{user.email}</p>
-            {editEmail && (
-              <input type="text" placeholder={user.email} ref={email} />
-            )}
-            {emailError[0] && (
-              <p className={styles.error_text}>{emailError[1]}</p>
-            )}
-          </div>
-          <div className={styles.editRowRight}>
-            <button
-              onClick={() => {
-                setEditEmail(!editEmail);
-                editEmail && handleEditEmail();
-              }}
-            >
-              {editEmail ? "Save" : "Edit"}
-            </button>
-          </div>
-        </div>
-        {user.phone && (
-          <div className={styles.editRowDiv}>
-            <div className={styles.editRowLeft}>
-              <p>E-mail:</p>
-              <p>{user.phone}</p>
-              {editPhone && (
-                <input type="text" placeholder={user.phone} ref={phone} />
-              )}
-              {phoneError[0] && (
-                <p className={styles.error_text}>{phoneError[1]}</p>
-              )}
+      {loading ? (
+        <Loader />
+      ) : (
+        user && (
+          <div className={styles.editDiv}>
+            <div className={styles.editRowDiv}>
+              <div className={styles.editRowLeft}>
+                <p>Name:</p>
+                <p>{user.name}</p>
+                {editName && (
+                  <input type="text" placeholder={user.name} ref={name} />
+                )}
+                {nameError[0] && (
+                  <p className={styles.error_text}>{nameError[1]}</p>
+                )}
+              </div>
+              <div className={styles.editRowRight}>
+                <button
+                  onClick={() => {
+                    setEditName(!editName);
+                    editName && handleEditName();
+                  }}
+                >
+                  {editName ? "Save" : "Edit"}
+                </button>
+              </div>
             </div>
-            <div className={styles.editRowRight}>
-              <button
-                onClick={() => {
-                  setEditPhone(!editPhone);
-                  editPhone && handleEditPhone();
-                }}
-              >
-                {editPhone ? "Save" : "Edit"}
-              </button>
+            <div className={styles.editRowDiv}>
+              <div className={styles.editRowLeft}>
+                <p>E-mail:</p>
+                <p>{user.email}</p>
+                {editEmail && (
+                  <input type="text" placeholder={user.email} ref={email} />
+                )}
+                {emailError[0] && (
+                  <p className={styles.error_text}>{emailError[1]}</p>
+                )}
+              </div>
+              <div className={styles.editRowRight}>
+                <button
+                  onClick={() => {
+                    setEditEmail(!editEmail);
+                    editEmail && handleEditEmail();
+                  }}
+                >
+                  {editEmail ? "Save" : "Edit"}
+                </button>
+              </div>
             </div>
-          </div>
-        )}
-        <div className={styles.editRowDiv}>
-          <div className={styles.editRowLeft}>
-            <p>Password:</p>
-            {editPass && (
-              <div className={styles.passDiv}>
-                <input type="text" placeholder="Enter Password" ref={oldPass} />
-                <input
-                  type="text"
-                  placeholder="Enter New Password"
-                  ref={newPass}
-                />
+            {user.phone && (
+              <div className={styles.editRowDiv}>
+                <div className={styles.editRowLeft}>
+                  <p>Phone:</p>
+                  <p>{user.phone}</p>
+                  {editPhone && (
+                    <input type="text" placeholder={user.phone} ref={phone} />
+                  )}
+                  {phoneError[0] && (
+                    <p className={styles.error_text}>{phoneError[1]}</p>
+                  )}
+                </div>
+                <div className={styles.editRowRight}>
+                  <button
+                    onClick={() => {
+                      setEditPhone(!editPhone);
+                      editPhone && handleEditPhone();
+                    }}
+                  >
+                    {editPhone ? "Save" : "Edit"}
+                  </button>
+                </div>
               </div>
             )}
-            {passError[0] && (
-              <p className={styles.error_text}>{passError[1]}</p>
-            )}
+            <div className={styles.editRowDiv}>
+              <div className={styles.editRowLeft}>
+                <p>Password:</p>
+                {editPass && (
+                  <div className={styles.passDiv}>
+                    <input
+                      type="password"
+                      placeholder="Enter Password"
+                      ref={oldPass}
+                    />
+                    <input
+                      type="password"
+                      placeholder="Enter New Password"
+                      ref={newPass}
+                    />
+                    <input
+                      type="password"
+                      placeholder="Enter Confirm Password"
+                      ref={confirmNewPass}
+                    />
+                  </div>
+                )}
+                {passError[0] && (
+                  <p className={styles.error_text}>{passError[1]}</p>
+                )}
+              </div>
+              <div className={styles.editRowRight}>
+                <button
+                  onClick={() => {
+                    setEditPass(!editPass);
+                    editPass && handleEditPassword();
+                  }}
+                >
+                  {editPass ? "Save" : "Edit"}
+                </button>
+              </div>
+            </div>
           </div>
-          <div className={styles.editRowRight}>
-            <button
-              onClick={() => {
-                setEditPass(!editPass);
-                editPass && handleEditPassword();
-              }}
-            >
-              {editPass ? "Save" : "Edit"}
-            </button>
-          </div>
-        </div>
-      </div>
-      <button className={styles.doneBtn} onClick={()=>{navigate(-1)}}>Done</button>
+        )
+      )}
+      <button
+        className={styles.doneBtn}
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        Done
+      </button>
     </div>
   );
 };

@@ -29,7 +29,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(logoutUser());
-    alert.info("Logged out successfully");
+    alert.success("Logged out successfully");
   };
 
   return (
