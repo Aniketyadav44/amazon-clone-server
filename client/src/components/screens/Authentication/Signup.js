@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Signup.module.css";
-import logo from "../../images/amazon.png";
+import logo from "../../../images/amazon.png";
 import { Link, useNavigate } from "react-router-dom";
 import validator from "validator";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
-import { register, clearErrors } from "../../actions/userAction";
-import Loader from "../layouts/Loader/Loader";
+import { register, clearErrors } from "../../../actions/userAction";
+import Loader from "../../layouts/Loader/Loader";
 
 const Signup = () => {
   const nameRef = useRef();
@@ -34,7 +34,7 @@ const Signup = () => {
       return;
     }
     if (isAuthenticated) {
-      navigate(-1);
+      navigate("/account");
     }
   }, [error, alert, dispatch, navigate, isAuthenticated]);
 

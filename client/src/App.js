@@ -1,8 +1,8 @@
 import "./fonts/Ember-medium.ttf";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Signup from "./components/screens/Signup";
-import Signin from "./components/screens/Signin";
+import Signup from "./components/screens/Authentication/Signup";
+import Signin from "./components/screens/Authentication/Signin";
 import Home from "./components/screens/Home";
 import ProductDetail from "./components/screens/ProductDetail";
 import Header from "./components/layouts/Header";
@@ -18,6 +18,8 @@ import Orders from "./components/screens/Orders";
 import EditLogin from "./components/screens/EditLogin";
 import EditAddresses from "./components/screens/EditAddresses";
 import Admin from "./components/screens/Admin";
+import ForgotPassword from "./components/screens/Authentication/ForgotPassword";
+import ResetPassword from "./components/screens/Authentication/ResetPassword";
 
 function App() {
   useEffect(() => {
@@ -41,7 +43,9 @@ function App() {
         <Route path="/orders" element={<Orders />} />
         <Route path="/edit-account" element={<EditLogin />} />
         <Route path="/edit-addresses/*" element={<EditAddresses />} />
-        <Route path="/admin" element={<Admin/>}/>
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/password/reset/:token" element={<ResetPassword />} />
       </Routes>
       <Footer />
     </div>

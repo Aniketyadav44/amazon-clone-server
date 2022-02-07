@@ -118,9 +118,7 @@ exports.forgotPassword = async (req, res) => {
     const resetToken = user.getResetToken();
     await user.save();
 
-    const resetPasswordUrl = `${req.protocol}://${req.get(
-      "host"
-    )}/api/v1/password/reset/${resetToken}`;
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
     const message = `Link to reset your password is:\n\n${resetPasswordUrl}\n\nIf you have not requested to reset your password, then please ignore this mail.`;
 
@@ -208,9 +206,7 @@ exports.updatePassword = async (req, res) => {
     }
     user.password = req.body.newPassword;
     await user.save();
-    res
-      .status(200)
-      .json({ success: true, message: "Password updated successfully" });
+    sendToken(user, res, 200);
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }

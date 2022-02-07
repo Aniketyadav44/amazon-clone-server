@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Signin.module.css";
-import logo from "../../images/amazon.png";
+import logo from "../../../images/amazon.png";
 import { Link, useNavigate } from "react-router-dom";
 import validator from "validator";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
-import { clearErrors, login } from "../../actions/userAction";
-import Loader from "../layouts/Loader/Loader";
+import { clearErrors, login } from "../../../actions/userAction";
+import Loader from "../../layouts/Loader/Loader";
 
 const Signin = () => {
   const emailRef = useRef();
@@ -33,7 +33,7 @@ const Signin = () => {
     }
 
     if(isAuthenticated){
-      navigate(-1)
+      navigate("/account")
     }
   }, [error, alert, dispatch,isAuthenticated, navigate]);
 
