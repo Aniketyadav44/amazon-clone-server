@@ -14,6 +14,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const { user, isAuthenticated } = useSelector((state) => state.user);
+  const { cartItems } = useSelector((state) => state.cart);
   const alert = useAlert();
 
   useEffect(() => {}, []);
@@ -111,7 +112,12 @@ const Header = () => {
             </p>
           </Link>
         </div>
-        <div style={{ minWidth: "100px" }}>
+        <div
+          onClick={() => {
+            navigate("/cart");
+          }}
+          style={{ minWidth: "100px" }}
+        >
           <div
             style={{
               display: "flex",
@@ -129,7 +135,7 @@ const Header = () => {
                   color: "#F08804",
                 }}
               >
-                0
+                {cartItems.length}
               </p>
               <img
                 style={{ width: "53px", height: "51px", marginRight: "10px" }}

@@ -1,4 +1,4 @@
-.loading {
+/* .loading {
     width: 100vw;
     height: 100vh;
     background-color: white;
@@ -21,4 +21,21 @@
     to {
       transform: rotateZ(-360deg);
     }
-  }
+  } */
+.mainDiv {
+  display: flex;
+  justify-content: center;
+}
+.loading {
+  position: absolute;
+  z-index: 1000;
+}
+.loading > img {
+  vertical-align: top;
+  align-self: center;
+}
+.overwrap {
+  background-color: #fdfdfd;
+  position: absolute;
+  z-index: 999;
+}

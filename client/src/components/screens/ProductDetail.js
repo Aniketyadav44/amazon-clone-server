@@ -9,6 +9,7 @@ import MetaData from "../layouts/MetaData";
 import ReactImageMagnify from "react-image-magnify";
 import ReactStars from "react-rating-stars-component";
 import dateFormat from "dateformat";
+import { addItemToCart } from "../../actions/cartAction";
 
 const rating_stars_options = {
   edit: false,
@@ -29,6 +30,7 @@ const ProductDetail = (props) => {
 
   const [selectedImage, setSelectedImage] = useState(0);
   const quantityRef = useRef();
+  const [quantityError, setQuantityError] = useState(false);
 
   useEffect(() => {
     if (error) {
@@ -40,10 +42,21 @@ const ProductDetail = (props) => {
   }, [dispatch, error, id, alert]);
 
   const addToCartHandler = () => {
-    console.log(quantityRef.current.value);
+    setQuantityError(false);
+    if (product.stock < quantityRef.current.value) {
+      setQuantityError(true);
+      return;
+    }
+    dispatch(addItemToCart(id, quantityRef.current.value));
+    alert.success("Item added to cart");
   };
 
   const buyNowHandler = () => {
+    setQuantityError(false);
+    if (product.stock < quantityRef.current.value) {
+      setQuantityError(true);
+      return;
+    }
     console.log(quantityRef.current.value);
   };
 
@@ -166,6 +179,13 @@ const ProductDetail = (props) => {
                 <option value="6">6</option>
               </select>
             </span>
+            {quantityError && (
+              <p
+                style={{ fontSize: "15px", marginTop: "0px", color: "#D55500" }}
+              >
+                Selected amount of product not available in stock.
+              </p>
+            )}
             <hr style={{ marginTop: "20px" }} className={styles.custom_hr} />
             <button className={styles.addToCartBtn} onClick={addToCartHandler}>
               Add to Cart

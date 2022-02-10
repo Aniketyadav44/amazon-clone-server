@@ -6,7 +6,7 @@ import styles from "./EditAddresses.module.css";
 import NewAddress from "./NewAddress";
 
 const EditAddresses = () => {
-  const { isAuthenticated, user, error } = useSelector((state) => state.user);
+  const { isAuthenticated, user} = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   const [showAddForm, setShowAddForm] = useState(false);
