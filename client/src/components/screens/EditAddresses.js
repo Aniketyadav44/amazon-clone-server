@@ -6,7 +6,7 @@ import styles from "./EditAddresses.module.css";
 import NewAddress from "./NewAddress";
 
 const EditAddresses = () => {
-  const { isAuthenticated, user} = useSelector((state) => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   const [showAddForm, setShowAddForm] = useState(false);
@@ -68,24 +68,26 @@ const EditAddresses = () => {
                 <h1>Add address</h1>
               </div>
             </div>
-            {user.address && user.address.map((a,index) => {
-              return (
-                <div key={index} className={styles.user_address}>
-                  <h3>{a.name}</h3>
-                  <p>
-                    {a.flat}, {a.area}
-                    <br />
-                    landmark: {a.landmark}
-                    <br />
-                    {a.city}, {a.state} {a.pindoce}
-                    <br />
-                    {a.country}
-                    <br />
-                    Phone number:{a.phone}
-                  </p>
-                </div>
-              );
-            })}
+            {user &&
+              user.address &&
+              user.address.map((a, index) => {
+                return (
+                  <div key={index} className={styles.user_address}>
+                    <h3>{a.name}</h3>
+                    <p>
+                      {a.flat}, {a.area}
+                      <br />
+                      landmark: {a.landmark}
+                      <br />
+                      {a.city}, {a.state} {a.pindoce}
+                      <br />
+                      {a.country}
+                      <br />
+                      Phone number:{a.phone}
+                    </p>
+                  </div>
+                );
+              })}
           </div>
         </>
       )}

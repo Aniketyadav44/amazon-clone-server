@@ -21,6 +21,7 @@ import Admin from "./components/screens/Admin";
 import ForgotPassword from "./components/screens/Authentication/ForgotPassword";
 import ResetPassword from "./components/screens/Authentication/ResetPassword";
 import Cart from "./components/screens/Cart";
+import Checkout from "./components/screens/Checkout";
 
 function App() {
   useEffect(() => {
@@ -48,6 +49,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
       <Footer />
     </div>

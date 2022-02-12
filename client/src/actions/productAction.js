@@ -1,5 +1,6 @@
 import axios from "axios";
 
+//to get all products based on filters and queries
 export const getProduct =
   (keyword = "", currentPage = 1, price = [0, 1000000000], rating = [0, 5]) =>
   async (dispatch) => {
@@ -20,6 +21,7 @@ export const getProduct =
     }
   };
 
+  //to get single product by id
 export const getProductDetail = (id) => async (dispatch) => {
   try {
     dispatch({ type: "PRODUCT_DETAIL_REQUEST" });

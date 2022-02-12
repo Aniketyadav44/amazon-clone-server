@@ -19,23 +19,27 @@ const Signin = () => {
   const [passErrorText, setPassErrorText] = useState("");
 
   const alert = useAlert();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { error, loading, isAuthenticated, user } = useSelector(
     (state) => state.user
   );
 
+  const redirect = window.location.search
+    ? `/${window.location.search.split("=")[1]}`
+    : "/account";
+
   useEffect(() => {
     if (error) {
       alert.error(error);
-      dispatch(clearErrors())
+      dispatch(clearErrors());
       return;
     }
 
-    if(isAuthenticated){
-      navigate("/account")
+    if (isAuthenticated) {
+      navigate(redirect);
     }
-  }, [error, alert, dispatch,isAuthenticated, navigate]);
+  }, [error, alert, dispatch, isAuthenticated, navigate]);
 
   console.log("user", user);
 

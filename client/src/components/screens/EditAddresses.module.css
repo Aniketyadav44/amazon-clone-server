@@ -97,6 +97,20 @@
 .newadd_div > form > input:focus {
   box-shadow: 0 0 1px 3px #c8f3fa;
 }
+.newadd_div > form > select {
+  background-color: #fff;
+  height: 28px;
+  width: 103.5% ;
+  padding: 3px 7px;
+  line-height: normal;
+  border: 1px solid #888c8c;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgb(15 17 17 / 15%) inset;
+  outline: 0;
+  margin-top: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
 
 .submitBtn {
   padding: 10px;
@@ -115,13 +129,13 @@
 
 .address_row {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .user_address {
   min-height: 236px;
   width: 320px;
-  margin: 0 10px;
+  margin-left: 10px;
   border: 1px #d5d9d9 solid;
   border-radius: 8px;
   padding: 14px 18px;
@@ -134,9 +148,11 @@
   line-height: 20px;
   margin: 10px 0;
   height: fit-content;
+  width: 100%;
 }
 .user_address > p {
   font-size: 16px;
   line-height: 20px;
   margin-top: -100px;
+  height: fit-content;
 }

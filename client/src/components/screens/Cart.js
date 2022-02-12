@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./Cart.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MetaData from "../layouts/MetaData";
 import { addItemToCart, removeFromCart } from "../../actions/cartAction";
 import { useAlert } from "react-alert";
@@ -10,6 +10,7 @@ const Cart = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const alert = useAlert();
+  const navigate = useNavigate();
 
   const addToCartHandler = (id, value) => {
     dispatch(addItemToCart(id, value));
@@ -17,6 +18,10 @@ const Cart = () => {
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
+  };
+
+  const checkoutHandler = () => {
+    navigate("/signin?redirect=checkout");
   };
 
   const totalPrice = cartItems.reduce(
@@ -111,13 +116,15 @@ const Cart = () => {
           </div>
         )}
       </div>
-      <div className={styles.rightDiv}>
-        <p className={styles.subtotalText}>
-          Subtotal ({cartLength} {cartLength > 1 ? "items" : "item"}):
-          <span style={{ fontWeight: "700" }}>₹{totalPrice}</span>
-        </p>
-        <button>Proceed to Buy</button>
-      </div>
+      {cartLength > 0 && (
+        <div className={styles.rightDiv}>
+          <p className={styles.subtotalText}>
+            Subtotal ({cartLength} {cartLength > 1 ? "items" : "item"}):
+            <span style={{ fontWeight: "700" }}>₹{totalPrice}</span>
+          </p>
+          <button onClick={checkoutHandler}>Proceed to Buy</button>
+        </div>
+      )}
     </div>
   );
 };
