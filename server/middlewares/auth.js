@@ -5,7 +5,7 @@ exports.isAuthenticated = async (req, res, next) => {
   try {
     const { token } = req.cookies;
     if (!token) {
-      return res
+      return res  
         .status(401)
         .json({ success: false, message: "User not authenticated" });
     }
